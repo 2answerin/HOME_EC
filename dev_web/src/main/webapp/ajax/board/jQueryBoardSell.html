@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script defer src="./board.js"></script>
+    <link rel="stylesheet" href="./board.css" />
+    <script type="text/javascript">
+      const url = "./boardSellAction.html"; /* 집계된 보드 판매량 수치 */
+      function getBoardSold() {
+        $.ajax({
+          type: "GET",
+          url: url,
+          success: function (data) {
+            console.log(data);
+            soldProcess(data);
+          },
+        });
+      }
+      function soldProcess(data) {
+        console.log(data); // 파라미터로 넘어온 data
+        $("#boardSold").html(`<font size = "6">${data}</font>`);
+        console.log($("#price").text());
+        const price = $("#price").text();
+        const cost = $("#cost").text();
+        let cashPerBoard = price - cost;
+        let cash = cashPerBoard * data;
+        $("#cash").html(`<font size = "6">${cash}</font>`);
+      }
+    </script>
+  </head>
+  <body>
+    <script>
+      //이벤트 처리
+      $(document).ready(function () {
+        const btnMargin = $("#btnMargin");
+        btnMargin.bind("click", function () {
+          event.preventDefault();
+          getBoardSold();
+        });
+      });
+    </script>
+
+    <h2>보드 판매량</h2>
+    <table width="300px" height="80px">
+      <tr>
+        <th width="120px">보드 판매량</th>
+        <td width="180px"><span id="boardSold">10</span></td>
+      </tr>
+      <tr>
+        <th>구매가</th>
+        <td><span id="cost">100</span>원</td>
+      </tr>
+      <tr>
+        <th>소비자가</th>
+        <td><span id="price">120</span>원</td>
+      </tr>
+    </table>
+    <h2>마진금액 : <span id="cash">0</span>원</h2>
+    <button type="submit" id="btnMargin">마진은?</button>
+  </body>
+</html>
