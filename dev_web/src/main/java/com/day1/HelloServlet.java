@@ -32,16 +32,17 @@ public class HelloServlet extends HttpServlet {
 		System.out.print("doGet호출");
 		logger.info("doGet호출 성공");
 		res.setContentType("text/html;charset=UTF-8");
+		//인스턴스화에서 메소드를 사용하는 경우는 뭐가 다를까?
 		 PrintWriter out = res.getWriter();
 		 String msg = "누구세요? 나가주세요";
 	      out.print("<font size = 28px color= red>" + msg + "</font>");
 	      }
 
-
+	//추상클래스, 인터페이스 구현체 클래스 일때 오버라이드
+	//맵 - 인터페이스, 해쉬맵 - 구현체 클래스
 	@Override
 	public void doPost(HttpServletRequest req, HttpServletResponse res)
 			throws ServletException, IOException {
 		logger.info("doPost호출 성공");
 	}
 }
-

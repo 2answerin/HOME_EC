@@ -10,7 +10,7 @@
 const insertForm =()=>{
 	console.log("입력 화면 열기")
 	$('#dg_dept').dialog({
-		  title: '유출완료',
+		  title: '부서정보등록',
 		    width: 400,
 		    height: 400,
 		    closed: false,

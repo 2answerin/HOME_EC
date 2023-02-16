@@ -5,12 +5,20 @@
         <param-value>/WEB-INF/classes/log4.properties</param-value>
     </context-param>
     <servlet>
+    <servlet-name>TestServlet</servlet-name>
+    <servlet-class>com.mvc.controller.TestServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+    <servlet-name>TestServlet</servlet-name>
+    <url-pattern>/test/test.do</url-pattern>
+    </servlet-mapping>
+    <servlet>
     <servlet-name>DeptServlet</servlet-name>
     <servlet-class>com.day1.DeptManager</servlet-class>
     </servlet>
     <servlet-mapping>
     <servlet-name>DeptServlet</servlet-name>
-    <url-pattern>/dept/insertAction.do</url-pattern>
+    <url-pattern>/jEasyUI/dept/insertAction.do</url-pattern>
     </servlet-mapping>
     <servlet>
     <servlet-name>HelloServlet</servlet-name>
