@@ -31,18 +31,50 @@ public class HelloServlet extends HttpServlet {
 			throws ServletException, IOException {
 		System.out.print("doGet호출");
 		logger.info("doGet호출 성공");
+		String mem_id = req.getParameter("mem_id");
+		logger.info("사용자가 입력한 ID는"+mem_id);
 		res.setContentType("text/html;charset=UTF-8");
 		//인스턴스화에서 메소드를 사용하는 경우는 뭐가 다를까?
 		 PrintWriter out = res.getWriter();
 		 String msg = "누구세요? 나가주세요";
+		 //브라우저에서 요청[get방식]으로 요청 시 응답으로 나가는 문자열
+		 //문자열(1.텍스트파일:숫자의 경우 문자로 변환 후 씀 2.바이너리파일:데이터를 있는 그대로 읽고 씀)
+		 //text 메인타입 html 서브타입 - 브라우저가 번역 - 태그는 없고 내용만 출력
 	      out.print("<font size = 28px color= red>" + msg + "</font>");
 	      }
 
 	//추상클래스, 인터페이스 구현체 클래스 일때 오버라이드
 	//맵 - 인터페이스, 해쉬맵 - 구현체 클래스
+	//단위테스트 불가능 -> Postman사용하면 확인가능
+	//Post는 브라우저 통해서 테스트 불가능
 	@Override
 	public void doPost(HttpServletRequest req, HttpServletResponse res)
 			throws ServletException, IOException {
 		logger.info("doPost호출 성공");
+		res.setContentType("text/html;charset=UTF-8");
+		PrintWriter out = res.getWriter();
+		out.print("<h3>dsPost</h3>호출");
+
 	}
 }
+
+/* 웹서비스[요청하고 응답받기] 제공을 위한 언어
+ * 요청을 어디에.. ->브라우저->URL
+ * 요청방식에는 몇가지가 있지..
+ * 요청을 위해서 무엇이 준비되어있어야 하지..
+ * 
+ * 
+ * 
+ * get방식
+ * -서버측의 리소스(html,css,js..)를 가져오기 위해
+ * -쿼리스트링 전송(소용량)
+ * -노출되어있음
+ * -공유하기 좋음
+ * 
+ * post방식
+ * -서버에 데이터를 올리기 위해 설계됨
+ * -보안에는 유리, 공유에는 불리
+ * -데이터 메세지의 body에 담아 전송
+ * -글쓰기, 로그인, 회원가입
+ * 
+ */

@@ -24,6 +24,13 @@ public class MimeHtmlServlet2 extends HttpServlet {
 	throws ServletException, IOException
 	{
 		logger.info("doGet 호출");
+		//요청객체로 세션객체를 생성
+		//시간을 연장할 수 있음
+		//서블릿에서는 객체의 유지 정도가 다름 - 쓰레기..
+		//scope가 지원됨
+		//page scope - 그 페이지 안에서만 기억해줌
+		//request scope - 요청이 유지되는 동안에만 유지됨 - URL주소가 그대로면 유지됨 바뀌면 잃어버림
+		//session scope - URL 주소가 바뀌어도 유지됨
 		HttpSession session = req.getSession();
 		String myName = new String("이우주");
 		int age = 35;
