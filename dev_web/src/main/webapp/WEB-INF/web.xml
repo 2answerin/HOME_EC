@@ -28,6 +28,15 @@
     <servlet-name>HelloServlet</servlet-name>
     <url-pattern>/day1/hello.kh</url-pattern>
     </servlet-mapping>
+       <servlet>
+      <servlet-name>FrontController</servlet-name>
+      <servlet-class>com.pojo.step1.FrontMVC1</servlet-class>
+   </servlet>
+   <servlet-mapping>
+      <servlet-name>FrontController</servlet-name>
+      <!-- *.st1 ; 어떤 요청 이름이 오든 확장자가 st1으로 끝나면 FrontMVC1 서블릿이 인터셉트 -->
+      <url-pattern>*.st1</url-pattern>
+   </servlet-mapping>
     <session-config>
  	<session-timeout>10</session-timeout>
 </session-config>
