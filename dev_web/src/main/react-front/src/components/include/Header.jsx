@@ -1,10 +1,12 @@
 import React from 'react'
+import { Button } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import { useRevalidator } from 'react-router-dom';
 
-const Header = () => {
+const Header = ({userId,onLogout}) => {
   return (
     <React.Fragment>
       <Navbar bg="light" expand="lg">
@@ -27,6 +29,7 @@ const Header = () => {
               </NavDropdown.Item>
             </NavDropdown>
           </Nav>
+          {onLogout && <Button variant = 'primary' onclick = {onLogout}>Logout</Button>}
         </Navbar.Collapse>
       </Container>
     </Navbar>

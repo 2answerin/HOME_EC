@@ -22,7 +22,7 @@ public class FrontMVC1 extends HttpServlet {
 	 * 따라서 doGet메소드와 doPost메소드 안에서 doService메소드 호출할 때 파라미터로 넘겨받음 
 	 */
 	protected void doService(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		logger.info("doService 호출");
+		logger.info("doService 호출"); 
 		String uri = req.getRequestURI(); //주소창에 입력된 값 중 도메인과 포트번호가 제외된 값만 받음
 		logger.info(uri); // /dept/getDeptList.st1
 		String context = req.getContextPath(); // "/" -> server.xml
