@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
-
+//페이지에 대한 처리
 public class ActionSupport extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	Logger logger = Logger.getLogger(ActionSupport.class);
@@ -30,7 +30,7 @@ public class ActionSupport extends HttpServlet {
 			try {
 				obj = HandlerMapping.getController(upmu, req, res);
 			} catch (Exception e) {
-				logger.info("Exception : " + e.toString());
+				logger    .info("Exception : " + e.toString());
 			}
 			if(obj != null) {
 				String pageMove[] = null;
@@ -49,7 +49,7 @@ public class ActionSupport extends HttpServlet {
 					pageMove = new String[2]; //페이지에 대한 방 두개 생성
 					pageMove[0] = "forward";
 					pageMove[1] = mav.getViewName();
-					
+					 
 				}
 				if(pageMove !=null) {
 					String path = pageMove[1];
@@ -59,7 +59,7 @@ public class ActionSupport extends HttpServlet {
 			            RequestDispatcher view = req.getRequestDispatcher("/"+path+".jsp");
 			            view.forward(req, res);
 			         }else {
-			        	 path = pageMove[0]+","+pageMove[1];
+			        	 path = pageMove[0]+"/"+pageMove[1];
 			        	 RequestDispatcher view = req.getRequestDispatcher("/WEB-INF/view/"+path+".jsp");
 				            view.forward(req, res);
 			         }
