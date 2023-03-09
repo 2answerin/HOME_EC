@@ -5,16 +5,13 @@
 // jsp에서 자바코드(스크립틀릿)와 html코드의 작성 위치는 문제가 되지 않는다.
 // 왜냐하면 어차피 jsp는 서버에서 실행되고 그 결과가 text로 출력되는 것이므로 
 // html과 처리 시점이 완전 다르니까...
-   boolean isOk = false;
-/*    if(request.getParameter("isOk")!=null){
-      isOk = Boolean.parseBoolean(request.getParameter("isOk"));
-   } */
    List<Map<String,Object>> boardList = 
          (List<Map<String,Object>>)request.getAttribute("bList");
    int size = 0;
    if(boardList!=null){
       size = boardList.size();
    }      
+   out.print(size);
 %>    
 <!DOCTYPE html>
 <html>
@@ -42,7 +39,7 @@
       location.href = "./boardList.st3?cb_search="+cb_value+"&tb_search="+tb_value+"&bm_reg="+v_date;
    }   
    function boardDetail(bm_no){
-	   location.href = "./boardDetail.st3?bm_no" + bm_no;
+      location.href="./boardDetail.st3?bm_no="+bm_no;
    }
     function fileDown(fname){
       location.href="downLoad.jsp?bs_file="+fname;
@@ -154,12 +151,12 @@
         </thead>
         <tbody>
 <%
-   if(size==0){      
+   if(size==0){
 %>    
 <script>
    $.messager.alert('Info','조회결과가 없습니다.');
 </script>
-<%      
+<%
    }
    else if(size>0){
       for(int i=0;i<size;i++){
@@ -169,8 +166,8 @@
            <tr>
               <td><%=1%></td>
               <td>
-<!-- 너 댓글이니? -->        
-<a href="javascript:boardDetail('<%rMap.get("BM_NO");%>')" style="text-decoration:none;color:#000000">              
+<!-- 너 댓글이니? -->
+<a href="javascript:boardDetail('<%=rMap.get("BM_NO") %>')" style="text-decoration:none;color:#000000">              
               <%=rMap.get("BM_TITLE")%>
 </a>              
               </td>
@@ -231,12 +228,12 @@
 %>
 <!-- 글입력 화면 추가 시작 -->
     <div id="dlg_boardIns" footer="#tb_boardIns" class="easyui-dialog" title="글쓰기" data-options="modal:true,closed:true" style="width:600px;height:400px;padding:10px">
-        <!-- <form id="f_boardIns" method="post" enctype="multipart/form-data" action="./boardInsert.pj"> -->
-        <form id="f_boardIns" method="get" action="./boardInsert.st3">
+        <form id="f_boardIns" method="post" enctype="multipart/form-data" action="./boardInsert.st3">
+        <!-- <form id="f_boardIns" method="get" action="./boardInsert.st3"> -->
         <!-- hidden속성은 화면에 보이지 않음. 개발자가 필요로 하는 값
-        등록 부분과 수정 부분이 동시에 발생할 수 도 있다 - 트랜잭션 처리가 필요함
+        등록 부분과 수정 부분이 동시에 발생할 수 도 있다  - 트랜잭션 처리가 필요함
         트랜잭션 처리가 필요한 경우의 메소드 설계
-        -->
+         -->
        <input type="hidden" id="bm_no" name="bm_no" value="0">
        <input type="hidden" id="bm_group" name="bm_group" value="0">
        <input type="hidden" id="bm_pos" name="bm_pos" value="0">
