@@ -12,6 +12,7 @@ import {
   onValue,
 } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-database.js";
 import DeptRow from '../dept/DeptRow'
+import { Navigate, useNavigate } from 'react-router-dom'
 
 //db에서 데이터 가져와서 처리하기
 const firebaseConfig = {
@@ -28,7 +29,13 @@ const app = initializeApp(firebaseConfig);
 console.log(app)
 const database = getDatabase()
 
-const FireDeptPage = () => {
+const FireDeptPage = ({authLogic}) => {
+  const navigate = useNavigate()//화면전환에 필요
+  const onLogout = () => {
+    console.log('FireDeptPage 호출')
+    authLogic.logout()
+  }
+  
   const [depts, setDepts] = useState([]);
   useEffect(() => {
       //setDepts(depts)
@@ -48,7 +55,7 @@ const FireDeptPage = () => {
   console.log(depts)
   return (
     <>
-      <Header />
+      <Header onLogout={onLogout}/>
       <div>부서 관리 페이지</div>
       <div className="dept-list">
       <Table striped bordered hover>

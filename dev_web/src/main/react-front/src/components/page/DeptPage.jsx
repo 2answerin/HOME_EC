@@ -5,7 +5,20 @@ import { useState } from 'react'
 import { Table } from 'react-bootstrap'
 import { useEffect } from 'react'
 
-const DeptPage = () => {
+const DeptPage = ({authLogic}) => {
+  const navigate = useNavigate()//화면전환에 필요
+  const onLogout = () => {
+    console.log('BoardPage 호출')
+    authLogic.logout()
+  }
+
+  useEffect(() => {
+    authLogic.onAuthChange(user => { //authLogic.js 호출 - 상태가 바뀌면 
+      if(!user){
+          navigate("/")  //페이지 이동
+      }
+    })
+})
   const [depts, setDepts] = useState([
     {deptno:10, dname:"1팀", loc:"부산"},
     {deptno:20, dname:"2팀", loc:"서울"},
@@ -20,7 +33,7 @@ const DeptPage = () => {
   );//옵션에 별도의 값을 지정하지 않으면 최초 한번만 실행됨
   return (
     <>
-      <Header />
+      <Header onLogout={onLogout}/>
       <div>부서 관리 페이지</div>
       <div className="dept-list">
       <Table striped bordered hover>
