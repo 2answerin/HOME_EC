@@ -11,6 +11,8 @@ import WorkoutPage from './components/page/WorkoutPage';
 import HackerNewsPage from './components/page/HackerNewsPage';
 import YoutubePage from './components/page/YoutubePage';
 import { useEffect, useState } from 'react';
+import BoardDetail from './board/BoardDetail';
+import BoardWriterFrom from './board/BoardWriterFrom';
 
 //index.js에서 브라우저 라우터로 감싸진 App태그 속성값으로 넘어온 주소번지를 받는다
 const App = ({authLogic}) => { //{authLogic}는 props자리
@@ -48,7 +50,7 @@ const App = ({authLogic}) => { //{authLogic}는 props자리
   const handleAdd = (name) => {
     //AddFrom화면에서 사용자가 입력한 이름을 받아옴
     //세번째 파라미터는 0으로 초기화
-   const workouts = [...items, {id:Date.now(), name, count:0}]
+  const workouts = [...items, {id:Date.now(), name, count:0}]
    //상태 훅에 반영 - 스프레드 연산자를 활용하여 새로운 주소번지가 채번되도록 처리해야함
    //상태값이 변경되었다는 사실을 리액트에서 인지할 수 있음
     setItems([...workouts])
@@ -57,10 +59,12 @@ const App = ({authLogic}) => { //{authLogic}는 props자리
   //Router를 이용하면 SPA(single page application)을 누릴 수 있다
   return (
     <>
-   <Routes>
+  <Routes>
         <Route path='/' exact={true} element={<LoginPage authLogic={authLogic} />} />
         <Route path='/home/:userId' exact={true} element={<HomePage authLogic={authLogic}/>} />
         <Route path='/board' exact={true} element={<BoardPage authLogic={authLogic} />} />
+        <Route path='/boarddetail/:bm_no' exact={true} element={<BoardDetail/>} />
+        <Route path='/board/write/*' element={<BoardWriterFrom/>} />
         <Route path='/workout' exact={true} element={<WorkoutPage authLogic={authLogic} workouts={items}
         onIncrement={handleIncrement} onDecrement={handleDecrement} onAdd={handleAdd} onDelete={handleDelete}/>} />
         <Route path='/hackernews' exact={true} element={<HackerNewsPage authLogic={authLogic} />} />

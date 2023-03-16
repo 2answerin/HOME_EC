@@ -8,8 +8,8 @@ public class PageBar {
 	private int totalRecord;//list.size():47row
 	//페이지당 레코드 수
 	private int numPerPage;// 10개씩이다
-	//블럭당 디폴트 페이지 수 - 여기서는 일단 2개로 정함.
-	private int pagePerBlock=2;
+	//블럭당 디폴트 페이지 수 - 여기서는 일단 3개로 정함.
+	private int pagePerBlock=3;
 	//총페이지 수
 	private int totalPage;
 	//총블럭 수

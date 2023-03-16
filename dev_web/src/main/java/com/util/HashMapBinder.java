@@ -46,7 +46,9 @@ public class HashMapBinder {
         }
         // 첨부 파일에 대한 정보 받아오기
         Enumeration<String> files = multi.getFileNames(); // n개 처리 가능
+        logger.info(files);
         if (files != null) {
+        	logger.info("file가 널이 아니면");
             // 업로드 대상 파일을 객체로 만듦
             File file = null; // 내용까지 복제되는 것은 아님 - 파일명만 객체화
             while (files.hasMoreElements()) {
@@ -60,7 +62,7 @@ public class HashMapBinder {
             } // end while
                 // 첨부 파일에 크기를 담을 수 있는 변수 선언
             double size = 0;
-            if (files != null) {
+            if (file != null) {
                 size = file.length(); // 파일 크기를 byte 단위로 담음
                 size = size / 1024.0; // byte -> kbyte
                 pMap.put("bs_size", size);
