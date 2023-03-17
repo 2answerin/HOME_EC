@@ -27,7 +27,7 @@ public class MemberController implements Controller3 {
         rMap = memberLogic.login(pMap);
         logger.info(rMap);
         
-        //////////Cookie
+        //////////Cookie//////////
         Cookie cmem_id = new Cookie("cmem_id",rMap.get("MEM_ID").toString());
         cmem_id.setPath("/");
         cmem_id.setMaxAge(60*60);
@@ -39,6 +39,24 @@ public class MemberController implements Controller3 {
         
         return "redirect:./cindex.jsp"; //리턴을 cindex.jsp 화면으로 띄워준다
      }
+	@Override
+	public Object logout(HttpServletRequest req, HttpServletResponse res) {
+		logger.info("logout 호출");
+		//쿠키는 삭제하는 메소드가 따로 없음
+		//생성자에 두번째 파라미터에 빈문자열로 처리해줘
+		//시간을 0으로 초기화
+		//도메인도 동일하게 맞춰야 삭제가 됨
+	    Cookie cmem_id = new Cookie("cmem_id","");
+	    cmem_id.setPath("/");
+	    cmem_id.setMaxAge(0);
+	    res.addCookie(cmem_id);
+	    Cookie cmem_name = new Cookie("cmem_name","");
+	    cmem_name.setPath("/");
+	    cmem_name.setMaxAge(0);
+	    res.addCookie(cmem_name);
+	    //리액트 시에는 : navigate = usrNavigate("./cindex.jsp")
+	    return "redirect:./cindex.jsp"; // => member/cindex.jsp
+	}
 	@Override
 	public ModelAndView zipcodeList(HttpServletRequest req, HttpServletResponse res) {
 		return null;

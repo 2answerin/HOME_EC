@@ -56,10 +56,12 @@ const login = () => {
 	   const user_id = $("#_easyui_textbox_input1").val();
 	   //사용자가 입력한 비밀번호 가져오기
 	   const user_pw = $("#_easyui_textbox_input2").val();
-	   
-	   
 	   location.href="./login.st3?mem_id="+user_id+"&mem_pw="+user_pw;
 }
+	   const logout = () => {
+	   //여기서 ./가 없으면 pageMove배열에 매칭이 안되니까 조심
+	   window.location.href="./logout.st3";
+	   }
 </script>
 </head>
 <body>
@@ -70,7 +72,10 @@ const login = () => {
 		<!-- 메뉴 구성 [로그인화면과 트리메뉴] -->
 		<div id="p" data-options="region:'west'" title="West"
 			style="width: 200px; padding: 10px">
-			<!-- ==================[[ 로그인 화면 ]]================== -->
+<%
+	if(cmem_id == null){
+%>
+<!-- ==================[[ 로그인 화면 ]]================== -->
 			<div id="d_login" align="center">
 				<input id="tb_id" type="text" style="width: 130px">
 				<script>
@@ -103,7 +108,33 @@ const login = () => {
 					});
 				</script>
 			</div>
-			<!-- ==================[[ 로그아웃 화면 ]]================== -->
+<!-- ==================[[ 로그인 화면 ]]================== -->
+<%
+	}
+	else{//로그인 한 상태
+%>
+<!-- ==================[[ 로그아웃 화면 ]]================== -->
+	<div id="d_logout" align="center">
+		<span><%=cmem_name %>님 환영합니다.</span>
+		<br/>
+		<div style="margin: 3px 0;"></div><!-- 여백 -->
+				<a id="btn_logout" href="javascript:logout()">로그아웃</a>
+				<script>
+					$('#btn_logout').linkbutton({
+						iconCls : 'icon-back'
+					});
+				</script>
+				<a id="btn_member" href="javascript:memberShip()">정보수정</a>
+				<script>
+					$('#btn_member').linkbutton({
+						iconCls : 'icon-edit'
+					});
+				</script>
+	</div>
+<!-- ==================[[ 로그아웃 화면 ]]================== -->
+<%
+	}
+%>
 			<div id="d_logout" align="center"></div>
 			<!-- 메뉴 구성 [로그인화면, 트리메뉴] -->
 			<div style="margin: 3px 0;"></div>

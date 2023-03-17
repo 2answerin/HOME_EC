@@ -8,6 +8,7 @@
 	 c1.setPath("/onLineTest");
 	 c1.setMaxAge(60*60);//평가시간이 60분일때 시간 설정값이다
 	 response.addCookie(c1);
+	 
 %>   
 <!DOCTYPE html>
 <html>

@@ -119,10 +119,20 @@ public class HandlerMapping {
 				return (ModelAndView) obj;
 			}
 			// 리턴타입이 String
-			if (obj instanceof String) {
+			else if (obj instanceof String) {
 				return (String) obj;
 				}
+			}//end of login
+			else if ("logout".equals(upmu[1])) {
+			obj = controller.logout(req, res);
+			if (obj instanceof ModelAndView) {
+				return (ModelAndView) obj;
 			}
+			// 리턴타입이 String
+			else if (obj instanceof String) {
+				return (String) obj;
+				}
+			}//end of logout
 		}//end of 회원관리
 		// 주문관리
 		else if ("order".equals(upmu[0])) {
